@@ -1,28 +1,31 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class App {
+    
+    private static int sexNumber;
+
     public static void main(String[] args) {
         // initialiasation d'un scanner pour lire des inputs dans le programme
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Welcome to the complainer generator");
-        String sex = ChooseSex(scanner);
-        String firstName = ChooseFirstName(scanner);
-        String lastName = ChooseLastName(scanner);
-        String complaint = ChooseComplaint(scanner);
-        GeneratePerson(sex, firstName, lastName, complaint);
+        // System.out.println("Welcome to the complainer generator");
+        // String sex = ChooseSex(scanner);
+        // String firstName = ChooseFirstName(sexNumber);
+        // String lastName = ChooseLastName(scanner);
+        // String complaint = ChooseComplaint(scanner);
+        // GeneratePerson(sex, firstName, lastName, complaint);
 
         scanner.close();
     }
 
     public static String ChooseSex(Scanner scanner) {
-        System.out.println("To start, please choose a Sex \n");
-        System.out.println("[0]: Male");
-        System.out.println("[1]: Female");
-        System.out.print("Your choice:");
 
-        int selection = scanner.nextInt();
-        scanner.nextLine(); // ici on viens "annuler le enter Enter sinon ca bug dans
+        Random random = new Random();
+
+        int selection = random.nextInt(1);
+        sexNumber = selection; 
+        // scanner.nextLine(); // ici on viens "annuler le enter Enter sinon ca bug dans
         // le choose name tantot"
 
         switch (selection) {
@@ -31,15 +34,57 @@ public class App {
             case 1:
                 return "Female 👩‍🦰";
             default:
-                System.out.println("Please choose between the two values");
+                // System.out.println("Please choose between the two values");
                 return ChooseSex(scanner);
         }
     }
 
-    public static String ChooseFirstName(Scanner scanner) {
-        System.out.print("Please choose a first name : ");
+    public static String ChooseFirstName(int sex) {
+        // System.out.print("Please choose a first name : ");
+        Random random = new Random();
+        int nameNumber = random.nextInt(10);
+        if(sex == 0){
+            //c'est des noms masculins
+            return GenerateFirstNameM(nameNumber);
+        } else if(sex == 1){
+            //c'est des noms Feminins
+            return GenerateFirstNameF(nameNumber);
+        }
+    }
+    
+    public static String GenerateFirstNameM(int index){
+           String[] nomsGars = {
+            "Mathieu",
+            "David",
+            "Chu",
+            "Orlando",
+            "Virgil",
+            "Pier-Olivier",
+            "Sam",
+            "Yassine",
+            "Yousaif",
+            "Jean-Guy",
+           }; 
+           return nomsGars[index];
+           
 
-        return scanner.nextLine();
+    }
+
+    public static String GenerateFirstNameF(int index){
+
+           String[] nomsFilles = {
+            "Laura",
+            "Audrey",
+            "Alexia",
+            "Marie",
+            "Sarah",
+            "Channel",
+            "Camille",
+            "Roxanne",
+            "Isabelle",
+            "Christine",
+           }; 
+           return nomsFilles[index];
     }
 
     public static String ChooseLastName(Scanner scanner) {
